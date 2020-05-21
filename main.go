@@ -1,35 +1,23 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/raptorgandalf/ozark-river-tracker/pkg/usgs"
 )
 
 func main() {
-	// timeSeries := usgs.TimeSeriesResponse{
-	// 	Name: "Test",
-	// }
-
-	// fmt.Println(timeSeries)
-
 	fmt.Println("Ozark river tracker!")
 
-	test, err := usgs.GetSites()
+	test, err := usgs.GetData([]string{"07064533"}, []string{usgs.GageHeight, usgs.Discharge})
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// fmt.Println(test)
+	discharge, _ := test.GetMostRecentDischarge()
+	height, _ := test.GetMostRecentGageHeight()
 
-	var timeSeries usgs.TimeSeriesResponse
-	err = json.Unmarshal(test, &timeSeries)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	fmt.Println(timeSeries)
+	fmt.Println(discharge)
+	fmt.Println(height)
 }
