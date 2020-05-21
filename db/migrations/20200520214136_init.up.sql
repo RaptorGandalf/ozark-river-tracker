@@ -1,27 +1,28 @@
 create table River (
-    ID UUID not null,
-    Name text not null,
-    Latitude double precision not null,
-    Longitude double precision not null,
-    primary key (ID)
+    id UUID not null,
+    name text not null,
+    latitude double precision not null,
+    longitude double precision not null,
+    primary key (id)
 );
 
 create table Gauge (
-    ID UUID not null,
-    Name text not null,
-    Code text not null,
-    RiverID UUID not null,
-    Latitude double precision not null,
-    Longitude double precision not null,
-    primary key (ID),
-    constraint Gauge_River_fk foreign key (RiverID)
-        references River (ID)
+    id UUID not null,
+    name text not null,
+    code text not null,
+    river_id UUID not null,
+    latitude double precision not null,
+    longitude double precision not null,
+    primary key (id),
+    constraint Gauge_River_fk foreign key (river_id)
+        references River (id)
 );
 
 create table Metric (
-    ID UUID not null,
-    GaugeType text not null,
-    Value double precision not null,
-    Date date not null,
-    primary key (ID)
+    id UUID not null,
+    gauge_id UUID not null,
+    gauge_type text not null,
+    value double precision not null,
+    recorded_date date not null,
+    primary key (id)
 );
