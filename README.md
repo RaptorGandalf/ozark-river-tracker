@@ -20,6 +20,10 @@ migrate create -dir=db/migrations/ -ext=.sql <migration_name>
 migrate -path=db/migrations/ -database <postgres_connection_string> up
 ```
 
+## Tests
+
+Tests are written using [test suites](https://pkg.go.dev/github.com/stretchr/testify/suite?tab=doc)
+
 #### Running Tests
 
 ```
