@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/raptorgandalf/ozark-river-tracker/api/repository"
 	"github.com/raptorgandalf/ozark-river-tracker/pkg/usgs"
 )
 
@@ -20,4 +21,11 @@ func main() {
 
 	fmt.Println(discharge)
 	fmt.Println(height)
+
+	_, err = repository.GetDatabase()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Got database!")
+	}
 }
