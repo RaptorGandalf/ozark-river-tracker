@@ -3,6 +3,8 @@ package repository_test
 import (
 	"testing"
 
+	"github.com/google/uuid"
+
 	"github.com/raptorgandalf/ozark-river-tracker/api/model"
 	"github.com/raptorgandalf/ozark-river-tracker/api/repository"
 
@@ -52,7 +54,7 @@ func (suite *RiverTestSuite) TestGetAll() {
 	result, err := suite.Db.RiverRepo.GetAll()
 
 	assert.Nil(suite.T(), err)
-	assert.Equal(suite.T(), 2, len(result))
+	assert.Equal(suite.T(), 2, len(*result))
 }
 
 func (suite *RiverTestSuite) TestGet() {
@@ -64,6 +66,13 @@ func (suite *RiverTestSuite) TestGet() {
 
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), river.Id, result.Id)
+}
+
+func (suite *RiverTestSuite) TestGetNotFound() {
+	result, err := suite.Db.RiverRepo.Get(uuid.New())
+
+	assert.Nil(suite.T(), err)
+	assert.Nil(suite.T(), result)
 }
 
 func (suite *RiverTestSuite) TestCreate() {
@@ -110,6 +119,7 @@ func (suite *RiverTestSuite) TestDelete() {
 
 	assert.Nil(suite.T(), err)
 
-	_, err = suite.Db.RiverRepo.Get(river.Id)
-	assert.NotNil(suite.T(), err)
+	actual, err := suite.Db.RiverRepo.Get(river.Id)
+	assert.Nil(suite.T(), err)
+	assert.Nil(suite.T(), actual)
 }

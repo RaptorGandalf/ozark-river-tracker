@@ -7,8 +7,8 @@ import (
 )
 
 type RiverRepository interface {
-	GetAll() ([]model.River, error)
-	Get(uuid.UUID) (model.River, error)
+	GetAll() (*[]model.River, error)
+	Get(uuid.UUID) (*model.River, error)
 	Create(river *model.River) error
 	Update(river *model.River) error
 	Delete(uuid.UUID) error
@@ -24,20 +24,24 @@ func GetRiverRepository(db *gorm.DB) RiverRepository {
 	}
 }
 
-func (r *riverRepository) GetAll() ([]model.River, error) {
+func (r *riverRepository) GetAll() (*[]model.River, error) {
 	var rivers []model.River
 
 	err := r.DB.Find(&rivers).Error
 
-	return rivers, err
+	return &rivers, err
 }
 
-func (r *riverRepository) Get(id uuid.UUID) (model.River, error) {
+func (r *riverRepository) Get(id uuid.UUID) (*model.River, error) {
 	var river model.River
 
 	err := r.DB.Where("id = ?", id).Take(&river).Error
 
-	return river, err
+	if err == gorm.ErrRecordNotFound {
+		return nil, nil
+	}
+
+	return &river, err
 }
 
 func (r *riverRepository) Create(river *model.River) error {
