@@ -33,6 +33,7 @@ func main() {
 
 	router.Setup(http, connection)
 
+	// TODO Set with ENV var or maybe just use "localhost"
 	err = http.Run("127.0.0.1:80")
 	if err != nil {
 		fmt.Println(err)
