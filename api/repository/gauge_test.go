@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type RiverTestSuite struct {
+type GaugeTestSuite struct {
 	suite.Suite
 	Db    repository.Database
 	River model.River
@@ -30,7 +30,7 @@ func (suite *GaugeTestSuite) SetupTest() {
 
 	suite.Gauge = model.Gauge{
 		Name:      "Gauge1",
-		Code:      12345,
+		Code:      "12345",
 		Latitude:  42.0,
 		Longitude: 52.0,
 	}
@@ -108,7 +108,7 @@ func (suite *GaugeTestSuite) TestCreate() {
 
 	assert.Nil(suite.T(), err)
 
-	actual, err := suite.Db.GaugeRepo.Get(guage.Id)
+	actual, err := suite.Db.GaugeRepo.Get(gauge.Id)
 
 	assert.Nil(suite.T(), err)
 
