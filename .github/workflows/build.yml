@@ -44,6 +44,6 @@ jobs:
       run: go build -v ./main.go
 
     - name: Test
-      run: go test ./... -cover
+      run: go test ./... -v
       env:
         PG_CONN: postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable
