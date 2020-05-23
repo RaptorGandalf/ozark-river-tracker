@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Postgres
+    - name: Install Postgres
       uses: Daniel-Marynicz/postgresql-action@0.1.0
       with:
         postgres_db: ort_development
@@ -34,6 +34,14 @@ jobs:
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
+
+    - name: Migrate
+      run: |
+        curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | apt-key add -
+        echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/migrate.list
+        apt-get update
+        apt-get install -y migrate
+        migrate -path=db/migrations/ -database postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable up
 
     - name: Build main
       run: go build -v ./main.go
