@@ -41,4 +41,4 @@ jobs:
     - name: Test
       run: go test ./... -cover
       env:
-        PG_CONN: postgres://postgres:postgres@127.0.0.1:80/ort_development?sslmode=disable
+        PG_CONN: postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable
