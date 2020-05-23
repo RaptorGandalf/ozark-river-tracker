@@ -1,4 +1,4 @@
-name: Go
+name: Builds
 
 on:
   push:
@@ -12,6 +12,11 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+
+    - name: Postgres
+      uses: Daniel-Marynicz/postgresql-action@0.1.0
+      with:
+        postgres_db: ort_development
 
     - name: Set up Go 1.x
       uses: actions/setup-go@v2
@@ -30,8 +35,10 @@ jobs:
             dep ensure
         fi
 
-    - name: Build
-      run: go build -v .
+    - name: Build main
+      run: go build -v ./main.go
 
     - name: Test
-      run: go test -v .
+      run: go test ./... -cover
+      env:
+        PG_CONN: postgres://postgres:postgres@127.0.0.1:80/ort_development?sslmode=disable
