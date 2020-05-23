@@ -47,3 +47,8 @@ jobs:
       run: go test ./... -v
       env:
         PG_CONN: postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: main
+        path: main
