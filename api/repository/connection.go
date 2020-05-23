@@ -10,6 +10,7 @@ import (
 type Database struct {
 	Connection *gorm.DB
 	RiverRepo  RiverRepository
+	GaugeRepo  GaugeRepository
 }
 
 func GetDatabase() (Database, error) {
@@ -45,5 +46,6 @@ func buildDatabase(connection *gorm.DB) Database {
 	return Database{
 		Connection: connection,
 		RiverRepo:  GetRiverRepository(connection),
+		GaugeRepo:  GetGaugeRepository(connection),
 	}
 }
