@@ -1,7 +1,6 @@
 package router_test
 
 import (
-	"fmt"
 	"net/http"
 	"testing"
 
@@ -83,12 +82,7 @@ func (suite *GaugeTestSuite) TestGet() {
 
 	gauge.RiverId = river.Id
 
-	err := suite.Db.GaugeRepo.Create(&gauge)
-	assert.Nil(suite.T(), err)
-	actual, _ := suite.Db.GaugeRepo.Get(gauge.Id)
-	fmt.Println("========================")
-	fmt.Println(actual)
-	fmt.Println("========================")
+	suite.Db.GaugeRepo.Create(&gauge)
 
 	resp := test_utility.PerformRequest("GET", "/api/gauges/"+gauge.Id.String(), "")
 
