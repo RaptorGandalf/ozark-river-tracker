@@ -8,6 +8,7 @@ import (
 
 type GaugeRepository interface {
 	GetAll() (*[]model.Gauge, error)
+	GetRiverGauges(riverId uuid.UUID) (*[]model.Gauge, error)
 	Get(uuid.UUID) (*model.Gauge, error)
 	Create(river *model.Gauge) error
 	Update(river *model.Gauge) error
@@ -28,6 +29,14 @@ func (r *gaugeRepository) GetAll() (*[]model.Gauge, error) {
 	var gauges []model.Gauge
 
 	err := r.DB.Find(&gauges).Error
+
+	return &gauges, err
+}
+
+func (r *gaugeRepository) GetRiverGauges(riverId uuid.UUID) (*[]model.Gauge, error) {
+	var gauges []model.Gauge
+
+	err := r.DB.Where("river_id = ?", riverId).Find(&gauges).Error
 
 	return &gauges, err
 }
