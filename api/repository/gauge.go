@@ -3,7 +3,7 @@ package repository
 import (
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	"github.com/raptorgandalf/ozark-river-tracker/api/model"
+	"github.com/river-folk/ozark-river-tracker/api/model"
 )
 
 type GaugeRepository interface {

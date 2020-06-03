@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/raptorgandalf/ozark-river-tracker/api/repository"
+	"github.com/river-folk/ozark-river-tracker/api/repository"
 )
 
 var Database repository.Database
