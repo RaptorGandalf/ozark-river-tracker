@@ -65,7 +65,39 @@ const (
 					],
 					"oid":"45807202"
 				 },
-				 "values":[],
+				 "values":[
+					{
+                        "value": [
+                            {
+                                "value": "1.80",
+                                "qualifiers": [
+                                    "P"
+                                ],
+                                "dateTime": "2020-06-03T15:30:00.000-05:00"
+                            }
+                        ],
+                        "qualifier": [
+                            {
+                                "qualifierCode": "P",
+                                "qualifierDescription": "Provisional data subject to revision.",
+                                "qualifierID": 0,
+                                "network": "NWIS",
+                                "vocabulary": "uv_rmk_cd"
+                            }
+                        ],
+                        "qualityControlLevel": [],
+                        "method": [
+                            {
+                                "methodDescription": "",
+                                "methodID": 77803
+                            }
+                        ],
+                        "source": [],
+                        "offset": [],
+                        "sample": [],
+                        "censorCode": []
+                    }
+				 ],
 				 "name":"USGS:07064533:00065:00000"
 			  }
 		   ]

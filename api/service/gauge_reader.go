@@ -12,13 +12,7 @@ import (
 	"github.com/river-folk/ozark-river-tracker/pkg/usgs"
 )
 
-func ReadGauges() {
-	db, err := repository.GetDatabase()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
+func ReadGauges(db repository.Database) {
 	fmt.Println("Loading rivers...")
 
 	rivers, err := db.RiverRepo.GetAll()
@@ -42,13 +36,15 @@ func ReadGauges() {
 
 		for _, gauge := range *gauges {
 
-			fmt.Printf("Reading %s gauge for %s river.\n", gauge.Name, river.Name)
+			fmt.Printf("Reading %s gauge on %s river.\n", gauge.Name, river.Name)
 
 			height, discharge, err := readGauge(gauge)
 			if err != nil {
 				fmt.Println(err)
 				continue
 			}
+
+			fmt.Printf("Creating metrics for %s gauge on %s river.\n", gauge.Name, river.Name)
 
 			createMetrics(gauge.Id, height, discharge, db)
 		}
@@ -80,6 +76,8 @@ func createMetrics(gaugeId uuid.UUID, height, discharge float64, db repository.D
 }
 
 func createMetric(gaugeId uuid.UUID, value float64, metricType string, db repository.Database) {
+	fmt.Println(value)
+
 	if value < 0 {
 		return
 	}

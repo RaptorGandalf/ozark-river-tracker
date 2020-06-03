@@ -8,10 +8,6 @@ import (
 	"strings"
 )
 
-const (
-	baseUrl = "https://waterservices.usgs.gov/nwis/iv/?format=JSON&sites=07064533&parameterCd=00065"
-)
-
 // TODO: For simplicity of parsing data, this should probably only get data for a single gauge
 func GetData(sites, parameters []string) (TimeSeriesResponse, error) {
 	var timeSeries TimeSeriesResponse
