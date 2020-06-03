@@ -5,10 +5,10 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/raptorgandalf/ozark-river-tracker/api/model"
-	"github.com/raptorgandalf/ozark-river-tracker/api/repository"
-	"github.com/raptorgandalf/ozark-river-tracker/api/router"
-	"github.com/raptorgandalf/ozark-river-tracker/pkg/test_utility"
+	"github.com/river-folk/ozark-river-tracker/api/model"
+	"github.com/river-folk/ozark-river-tracker/api/repository"
+	"github.com/river-folk/ozark-river-tracker/api/router"
+	"github.com/river-folk/ozark-river-tracker/pkg/test_utility"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"

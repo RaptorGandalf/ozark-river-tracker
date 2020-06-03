@@ -5,8 +5,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/raptorgandalf/ozark-river-tracker/api/model"
-	"github.com/raptorgandalf/ozark-river-tracker/api/repository"
+	"github.com/river-folk/ozark-river-tracker/api/model"
+	"github.com/river-folk/ozark-river-tracker/api/repository"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"

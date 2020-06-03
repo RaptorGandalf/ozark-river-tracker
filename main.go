@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/raptorgandalf/ozark-river-tracker/api/repository"
-	"github.com/raptorgandalf/ozark-river-tracker/api/router"
+	"github.com/river-folk/ozark-river-tracker/api/repository"
+	"github.com/river-folk/ozark-river-tracker/api/router"
 )
 
 func main() {

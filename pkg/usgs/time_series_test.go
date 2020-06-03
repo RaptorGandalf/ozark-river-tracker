@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/raptorgandalf/ozark-river-tracker/pkg/usgs"
+	"github.com/river-folk/ozark-river-tracker/pkg/usgs"
 )
 
 type TimeSeriesTestSuite struct {
