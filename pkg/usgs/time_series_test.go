@@ -84,8 +84,8 @@ func TestTimeSeriesTestSuite(t *testing.T) {
 	suite.Run(t, new(TimeSeriesTestSuite))
 }
 
-func (suite *TimeSeriesTestSuite) TestGetMostRecentGageHeight() {
-	result, err := suite.TimeSeriesResponse.GetMostRecentGageHeight()
+func (suite *TimeSeriesTestSuite) TestGetMostRecentGaugeHeight() {
+	result, err := suite.TimeSeriesResponse.GetMostRecentGaugeHeight()
 
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), float64(200), result)

@@ -28,7 +28,7 @@ func (suite *ClientTestSuite) TearDownTest() {
 }
 
 func (suite *ClientTestSuite) TestGetData() {
-	result, err := usgs.GetData([]string{"07064533"}, []string{usgs.GageHeight, usgs.Discharge})
+	result, err := usgs.GetData([]string{"07064533"}, []string{usgs.GaugeHeight, usgs.Discharge})
 
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), "ns720:timeSeriesResponseType", result.Name)
