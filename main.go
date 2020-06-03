@@ -11,17 +11,18 @@ import (
 func main() {
 	// fmt.Println("Ozark river tracker!")
 
-	// test, err := usgs.GetData([]string{"07064533"}, []string{usgs.GageHeight, usgs.Discharge})
+	// test, err := usgs.GetData([]string{"07067000"}, []string{usgs.GaugeHeight, usgs.Discharge, "91110"})
 	// if err != nil {
 	// 	fmt.Println(err)
 	// 	return
 	// }
 
 	// discharge, _ := test.GetMostRecentDischarge()
-	// height, _ := test.GetMostRecentGageHeight()
+	// height, _ := test.GetMostRecentGaugeHeight()
 
 	// fmt.Println(discharge)
 	// fmt.Println(height)
+	// fmt.Println(test)
 
 	connection, err := repository.GetConnection()
 	if err != nil {
