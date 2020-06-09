@@ -11,7 +11,7 @@ import (
 func main() {
 	// fmt.Println("Ozark river tracker!")
 
-	// test, err := usgs.GetData([]string{"07067000"}, []string{usgs.GaugeHeight, usgs.Discharge, "91110"})
+	// test, err := usgs.ReadGauge("07067000", []string{usgs.GaugeHeight, usgs.Discharge, "91110"})
 	// if err != nil {
 	// 	fmt.Println(err)
 	// 	return
