@@ -42,7 +42,7 @@ jobs:
       run: go build -v ./main.go -o main
 
     - name: Build Seeder
-        run: go build -v ./db/seed/main.go -o seed
+      run: go build -v ./db/seed/main.go -o seed
 
     - name: Test
       run: go test ./... -v
