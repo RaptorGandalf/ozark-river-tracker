@@ -8,11 +8,10 @@ import (
 	"strings"
 )
 
-// TODO: For simplicity of parsing data, this should probably only get data for a single gauge
-func GetData(sites, parameters []string) (TimeSeriesResponse, error) {
+func ReadGauge(siteCode string, parameters []string) (TimeSeriesResponse, error) {
 	var timeSeries TimeSeriesResponse
 
-	url := buildUrl(sites, parameters)
+	url := buildUrl([]string{siteCode}, parameters)
 
 	bytes, err := get(url)
 	if err != nil {

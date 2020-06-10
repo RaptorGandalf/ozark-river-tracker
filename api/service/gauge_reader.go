@@ -1,5 +1,3 @@
-// TODO: write tests
-
 package service
 
 import (
@@ -52,7 +50,7 @@ func ReadGauges(db repository.Database) {
 }
 
 func readGauge(gauge model.Gauge) (float64, float64, error) {
-	gaugeData, err := usgs.GetData([]string{gauge.Code}, []string{usgs.GaugeHeight, usgs.Discharge})
+	gaugeData, err := usgs.ReadGauge(gauge.Code, []string{usgs.GaugeHeight, usgs.Discharge})
 	if err != nil {
 		return -1, -1, err
 	}

@@ -33,6 +33,8 @@ func (suite *TimeSeriesTestSuite) SetupTest() {
 	var gageTimeSeries usgs.TimeSeries
 
 	gageTimeSeries.Variable.VariableCode = []usgs.VariableCode{gageVariableCode}
+	gageTimeSeries.SourceInfo.GeoLocation.GeogLocation.Latitude = 36.9
+	gageTimeSeries.SourceInfo.GeoLocation.GeogLocation.Latitude = -91.0
 	gageTimeSeries.Values = []usgs.Value{usgs.Value{Value: gageValues}}
 
 	dischargeVariableCode := usgs.VariableCode{
@@ -104,3 +106,11 @@ func (suite *TimeSeriesTestSuite) TestGetMostRecentWaterTemperature() {
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), float64(60), result)
 }
+
+// func (suite *TimeSeriesTestSuite) TestGetCoordinates() {
+// 	latitude, longitude, err := suite.TimeSeriesResponse.GetCoordinates()
+
+// 	assert.Nil(suite.T(), err)
+// 	assert.Equal(suite.T(), 36.9, latitude)
+// 	assert.Equal(suite.T(), -91.0, longitude)
+// }

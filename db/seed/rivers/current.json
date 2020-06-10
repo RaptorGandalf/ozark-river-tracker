@@ -1,0 +1,27 @@
+{
+    "River":{
+       "Name":"Current",
+       "Latitude":37.2828992,
+       "Longitude":-91.4103151
+    },
+    "Gauges":[
+       {
+          "Name":"Akers Ferry",
+          "Code":"07064533",
+          "Latitude":37.3756944,
+          "Longitude":-91.5528056
+       },
+       {
+          "Name":"Powder Mill",
+          "Code":"07066510",
+          "Latitude":37.18561389,
+          "Longitude":-91.1776639
+       },
+       {
+          "Name":"Van Buren",
+          "Code":"07067000",
+          "Latitude":36.99138889,
+          "Longitude":-91.0135
+       }
+    ]
+ }

@@ -2,27 +2,30 @@ package main
 
 import (
 	"fmt"
+	"time"
+
+	"github.com/river-folk/ozark-river-tracker/api/service"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-co-op/gocron"
 	"github.com/river-folk/ozark-river-tracker/api/repository"
 	"github.com/river-folk/ozark-river-tracker/api/router"
 )
 
 func main() {
-	// fmt.Println("Ozark river tracker!")
+	scheduler := gocron.NewScheduler(time.UTC)
 
-	// test, err := usgs.GetData([]string{"07067000"}, []string{usgs.GaugeHeight, usgs.Discharge, "91110"})
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
+	scheduler.Every(15).Minutes().Do(func() {
+		db, err := repository.GetDatabase()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// discharge, _ := test.GetMostRecentDischarge()
-	// height, _ := test.GetMostRecentGaugeHeight()
+		service.ReadGauges(db)
+	})
 
-	// fmt.Println(discharge)
-	// fmt.Println(height)
-	// fmt.Println(test)
+	scheduler.StartAsync()
 
 	connection, err := repository.GetConnection()
 	if err != nil {
@@ -34,8 +37,7 @@ func main() {
 
 	router.Setup(http, connection)
 
-	// TODO Set with ENV var or maybe just use "localhost"
-	err = http.Run("127.0.0.1:80")
+	err = http.Run("localhost:80")
 	if err != nil {
 		fmt.Println(err)
 	}
