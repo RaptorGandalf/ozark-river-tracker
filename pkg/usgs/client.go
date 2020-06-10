@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// TODO: For simplicity of parsing data, this should probably only get data for a single gauge
 func ReadGauge(siteCode string, parameters []string) (TimeSeriesResponse, error) {
 	var timeSeries TimeSeriesResponse
 

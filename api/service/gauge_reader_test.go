@@ -73,7 +73,7 @@ func (suite *GaugeReaderTestSuite) TestReadGauges() {
 	result, err := suite.Db.MetricRepo.GetAll()
 
 	assert.Nil(suite.T(), err)
-	assert.Equal(suite.T(), 1, len(*result))
+	assert.Equal(suite.T(), 2, len(*result))
 
 	list := *result
 	assert.Equal(suite.T(), gauge.Id, list[0].GaugeId)

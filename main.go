@@ -6,22 +6,26 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/river-folk/ozark-river-tracker/api/repository"
 	"github.com/river-folk/ozark-river-tracker/api/router"
+	"github.com/river-folk/ozark-river-tracker/pkg/usgs"
 )
 
 func main() {
-	// fmt.Println("Ozark river tracker!")
+	fmt.Println("Ozark river tracker!")
 
-	// test, err := usgs.ReadGauge("07067000", []string{usgs.GaugeHeight, usgs.Discharge, "91110"})
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
+	test, err := usgs.ReadGauge("07067000", []string{usgs.GaugeHeight, usgs.Discharge, "91110"})
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-	// discharge, _ := test.GetMostRecentDischarge()
-	// height, _ := test.GetMostRecentGaugeHeight()
+	discharge, _ := test.GetMostRecentDischarge()
+	height, _ := test.GetMostRecentGaugeHeight()
+	lat, lon, _ := test.GetCoordinates()
 
-	// fmt.Println(discharge)
-	// fmt.Println(height)
+	fmt.Println(discharge)
+	fmt.Println(height)
+	fmt.Println(lat)
+	fmt.Println(lon)
 	// fmt.Println(test)
 
 	connection, err := repository.GetConnection()
