@@ -39,10 +39,10 @@ jobs:
         migrate -path=db/migrations/ -database postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable up
 
     - name: Build Main
-      run: go build -v ./main.go -o main
+      run: go build -o main -v ./main.go
 
     - name: Build Seeder
-      run: go build -v ./db/seed/main.go -o seed
+      run: go build -o seeder -v ./db/seed/main.go
 
     - name: Test
       run: go test ./... -v
