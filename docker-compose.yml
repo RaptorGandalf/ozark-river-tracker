@@ -12,7 +12,7 @@ services:
 
 
   ort:
-    image: riverfolk/ort-backend
+    image: riverfolk/ort-backend:latest
     restart: always
     environment: 
       PG_CONN: postgres://postgres:postgres@127.0.0.1:5432/ort?sslmode=disable
