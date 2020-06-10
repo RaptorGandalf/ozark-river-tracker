@@ -53,6 +53,7 @@ jobs:
 
   docker:
     name: Docker
+    needs: Build
     runs-on: ubuntu-latest
     steps:
 
