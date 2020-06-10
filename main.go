@@ -2,13 +2,31 @@ package main
 
 import (
 	"fmt"
+	"time"
+
+	"github.com/river-folk/ozark-river-tracker/api/service"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-co-op/gocron"
 	"github.com/river-folk/ozark-river-tracker/api/repository"
 	"github.com/river-folk/ozark-river-tracker/api/router"
 )
 
 func main() {
+	scheduler := gocron.NewScheduler(time.UTC)
+
+	scheduler.Every(15).Minutes().Do(func() {
+		db, err := repository.GetDatabase()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		service.ReadGauges(db)
+	})
+
+	scheduler.StartAsync()
+
 	connection, err := repository.GetConnection()
 	if err != nil {
 		fmt.Println(err)
@@ -19,8 +37,7 @@ func main() {
 
 	router.Setup(http, connection)
 
-	// TODO Set with ENV var or maybe just use "localhost"
-	err = http.Run("127.0.0.1:80")
+	err = http.Run("localhost:80")
 	if err != nil {
 		fmt.Println(err)
 	}
