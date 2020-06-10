@@ -38,35 +38,27 @@ jobs:
         go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate
         migrate -path=db/migrations/ -database postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable up
 
-    - name: Build main
-      run: go build -v ./main.go
+    - name: Build Main
+      run: go build -v ./main.go -o main
+
+    - name: Build Seeder
+        run: go build -v ./db/seed/main.go -o seed
 
     - name: Test
       run: go test ./... -v
       env:
         PG_CONN: postgres://postgres:postgres@127.0.0.1:5432/ort_development?sslmode=disable
 
+    - name: Dockerize and push
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: riverfolk/ort-backend
+        tag_with_ref: true
+        tag_with_sha: true
+    
     - uses: actions/upload-artifact@v2
       with:
         name: main
         path: main
-
-  docker:
-    name: Docker
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Download Build Binaries
-        uses: actions/download-artifact@v1
-        with:
-          name: main
-
-      - name: Dockerize and push
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: riverfolk/ort-backend
-          tag_with_ref: true
-          tag_with_sha: true
