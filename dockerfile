@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:latest
 RUN mkdir /app 
 RUN mkdir /app/rivers
 RUN mkdir /app/db
