@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"os"
+	"github.com/river-folk/ozark-river-tracker/configuration"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -30,9 +30,7 @@ func GetDatabaseForConnection(connection *gorm.DB) Database {
 }
 
 func GetConnection() (*gorm.DB, error) {
-	connectionString := os.Getenv("PG_CONN")
-
-	db, err := gorm.Open("postgres", connectionString)
+	db, err := gorm.Open("postgres", configuration.Config.PostgressConnection)
 	if err != nil {
 		return nil, err
 	}

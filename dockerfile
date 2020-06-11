@@ -8,8 +8,8 @@ ADD db/seed/rivers /app/rivers/
 RUN apt update
 RUN apt install -y git
 RUN go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate
-RUN mkdir /migrations
-ADD db/migrations /migrations/
+RUN mkdir /db/migrations
+ADD db/migrations /db/migrations/
 WORKDIR /app
 RUN ["chmod", "+x", "docker-entrypoint.sh"]
 CMD ["./docker-entrypoint.sh"]
