@@ -3,6 +3,7 @@ version: '3.1'
 services:
 
   db:
+    name: ort_db
     image: postgres
     restart: always
     environment:
@@ -11,7 +12,8 @@ services:
       POSTGRES_DB: ort
 
 
-  ort:
+  api:
+    name: ort_api
     image: riverfolk/ort-backend:latest
     restart: always
     environment: 

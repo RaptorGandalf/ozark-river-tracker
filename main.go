@@ -50,7 +50,8 @@ func main() {
 
 	files, err := ioutil.ReadDir("db/migrations")
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 	fmt.Println(files)
 
