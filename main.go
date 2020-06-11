@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jinzhu/gorm"
 	"github.com/river-folk/ozark-river-tracker/api/service"
 
 	"github.com/gin-gonic/gin"
@@ -27,17 +28,24 @@ func main() {
 
 	scheduler.StartAsync()
 
-	connection, err := repository.GetConnection()
-	if err != nil {
-		fmt.Println(err)
-		return
+	var connection *gorm.DB
+	for {
+		con, err := repository.GetConnection()
+		if err != nil {
+			fmt.Println(err)
+			fmt.Println("Retrying in 10 seconds.")
+			time.Sleep(time.Second * 10)
+		} else {
+			connection = con
+			break
+		}
 	}
 
 	http := gin.Default()
 
 	router.Setup(http, connection)
 
-	err = http.Run("localhost:80")
+	err := http.Run("localhost:80")
 	if err != nil {
 		fmt.Println(err)
 	}
