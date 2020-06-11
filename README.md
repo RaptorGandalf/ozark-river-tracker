@@ -8,8 +8,6 @@ The API is intended to be consumed by a front end application aimed at providing
 
 ## Endpoints
 
-TODO Add Metrics Endpoints
-
 `/api/rivers` - Returns a list of all tracked rivers
 
 `/api/rivers/:id` - Returns a single river
@@ -19,6 +17,8 @@ TODO Add Metrics Endpoints
 `/api/gauges` - Returns a list of all tracked gauges
 
 `/api/gauges/:id` - Returns a single gauge
+
+`/api/gauges/:id/metrics` - Returns metrics for a single gauge
 
 ## Running a Local Instance
 
