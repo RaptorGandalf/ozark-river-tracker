@@ -78,6 +78,28 @@ func (suite *MetricTestSuite) TestGetAll() {
 	assert.Equal(suite.T(), 1, len(*result))
 }
 
+func (suite *MetricTestSuite) TestGetGaugeMetrics() {
+	river := suite.River
+	suite.Db.RiverRepo.Create(&river)
+
+	gauge := suite.Gauge
+	gauge.RiverId = river.Id
+	suite.Db.GaugeRepo.Create(&gauge)
+
+	metricA := suite.Metric
+	metricA.GaugeId = gauge.Id
+	suite.Db.MetricRepo.Create(&metricA)
+
+	metricB := suite.Metric
+	metricB.GaugeId = gauge.Id
+	suite.Db.MetricRepo.Create(&metricB)
+
+	result, err := suite.Db.MetricRepo.GetGaugeMetrics(gauge.Id)
+
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), 2, len(*result))
+}
+
 func (suite *MetricTestSuite) TestGet() {
 	river := suite.River
 	suite.Db.RiverRepo.Create(&river)

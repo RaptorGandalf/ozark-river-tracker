@@ -8,6 +8,7 @@ import (
 
 type MetricRepository interface {
 	GetAll() (*[]model.Metric, error)
+	GetGaugeMetrics(gaugeId uuid.UUID) (*[]model.Metric, error)
 	Get(uuid.UUID) (*model.Metric, error)
 	Create(Metric *model.Metric) error
 	Update(Metric *model.Metric) error
@@ -28,6 +29,14 @@ func (r *metricRepository) GetAll() (*[]model.Metric, error) {
 	var metrics []model.Metric
 
 	err := r.DB.Find(&metrics).Error
+
+	return &metrics, err
+}
+
+func (r *metricRepository) GetGaugeMetrics(gaugeId uuid.UUID) (*[]model.Metric, error) {
+	var metrics []model.Metric
+
+	err := r.DB.Where("gauge_id = ?", gaugeId).Find(&metrics).Error
 
 	return &metrics, err
 }

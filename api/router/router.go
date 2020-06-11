@@ -19,4 +19,6 @@ func Setup(r *gin.Engine, connection *gorm.DB) {
 	api.GET("/gauges", GetGauges)
 	api.GET("/rivers/:id/gauges", GetRiverGauges)
 	api.GET("/gauges/:id", GetGauge)
+
+	api.GET("/gauges/:id/metrics", GetGaugeMetrics)
 }
