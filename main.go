@@ -70,7 +70,7 @@ func main() {
 
 	router.Setup(http, connection)
 
-	err = http.Run("localhost:80")
+	err = http.Run("0.0.0.0:80")
 	if err != nil {
 		fmt.Println(err)
 	}
