@@ -11,4 +11,5 @@ type Metric struct {
 	GaugeId      uuid.UUID
 	Type         string
 	Value        float64
-	RecordedDate time.Time 
+	RecordedDate time.Time
+}

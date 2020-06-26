@@ -197,7 +197,7 @@ func (suite *MetricTestSuite) TestDelete() {
 	assert.Nil(suite.T(), actual)
 }
 
-func (suite.MetricTestSuite) TestDeleteOldMetrics() {
+func (suite *MetricTestSuite) TestDeleteOldMetrics() {
 	river := suite.River
 	suite.Db.RiverRepo.Create(&river)
 
@@ -205,25 +205,24 @@ func (suite.MetricTestSuite) TestDeleteOldMetrics() {
 	gauge.RiverId = river.Id
 	suite.Db.GaugeRepo.Create(&gauge)
 
+	oldMetric := suite.Metric
+	oldMetric.GaugeId = gauge.Id
+	oldMetric.RecordedDate = time.Now().AddDate(0, 0, -200)
+	suite.Db.MetricRepo.Create(&oldMetric)
+
 	metric := suite.Metric
 	metric.GaugeId = gauge.Id
+	metric.RecordedDate = time.Now().AddDate(0, 0, -80)
 	suite.Db.MetricRepo.Create(&metric)
 
-	err := suite.Db.MetricRepo.DeleteOldMetrics(metric.Id)
-
-	metric.RecordedDate = time.Now().AddDate(0, 0, -120)
-
+	err := suite.Db.MetricRepo.DeleteOldMetrics()
 	assert.Nil(suite.T(), err)
 
 	actual, err := suite.Db.MetricRepo.Get(metric.Id)
 	assert.Nil(suite.T(), err)
-	assert.Nil(suite.T(), actual)
+	assert.NotNil(suite.T(), actual)
 
-	metric.RecordedDate = time.Now().AddDate(0, 0, -80)
-
-	assert.Nil(suite.T(), err)
-
-	actual, err := suite.Db.MetricRepo.Get(metric.Id)
+	actual, err = suite.Db.MetricRepo.Get(oldMetric.Id)
 	assert.Nil(suite.T(), err)
 	assert.Nil(suite.T(), actual)
 }

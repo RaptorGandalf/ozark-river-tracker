@@ -167,9 +167,11 @@ func (suite *GaugeTestSuite) TestUpdate() {
 
 func (suite *GaugeTestSuite) TestDelete() {
 	river := suite.River
-	gauge := suite.Gauge
-
 	suite.Db.RiverRepo.Create(&river)
+
+	gauge := suite.Gauge
+	gauge.RiverId = river.Id
+	suite.Db.GaugeRepo.Create(&gauge)
 
 	gauge.RiverId = river.Id
 

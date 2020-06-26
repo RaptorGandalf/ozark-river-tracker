@@ -6,6 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 	"github.com/river-folk/ozark-river-tracker/api/model"
+	"github.com/river-folk/ozark-river-tracker/configuration"
 )
 
 type MetricRepository interface {
@@ -76,7 +77,6 @@ func (r *metricRepository) Delete(id uuid.UUID) error {
 }
 
 func (r *metricRepository) DeleteOldMetrics() error {
-	var cutoff = time.Now().AddDate(0, 0, -120)
-	return r.DB.Where("RecordedDate <= ?", cutoff).Delete(model.Metric{}).Error
-
+	var cutoff = time.Now().AddDate(0, 0, -configuration.Config.MetricDeleteDays)
+	return r.DB.Where("recorded_date <= ?", cutoff).Delete(model.Metric{}).Error
 }
