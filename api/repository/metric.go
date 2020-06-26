@@ -1,9 +1,12 @@
 package repository
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 	"github.com/river-folk/ozark-river-tracker/api/model"
+	"github.com/river-folk/ozark-river-tracker/configuration"
 )
 
 type MetricRepository interface {
@@ -13,6 +16,7 @@ type MetricRepository interface {
 	Create(Metric *model.Metric) error
 	Update(Metric *model.Metric) error
 	Delete(uuid.UUID) error
+	DeleteOldMetrics() error
 }
 
 type metricRepository struct {
@@ -70,4 +74,9 @@ func (r *metricRepository) Delete(id uuid.UUID) error {
 	}
 
 	return r.DB.Delete(&metric).Error
+}
+
+func (r *metricRepository) DeleteOldMetrics() error {
+	var cutoff = time.Now().AddDate(0, 0, -configuration.Config.MetricDeleteDays)
+	return r.DB.Where("recorded_date <= ?", cutoff).Delete(model.Metric{}).Error
 }
