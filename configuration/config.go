@@ -36,17 +36,3 @@ func init() {
 		MetricDeleteDays:    metricDeleteDays,
 	}
 }
-func init() {
-	metricDeleteDays := 120
-
-	converted, err := strconv.Atoi(os.Getenv("METRIC_DELETE_DAYS"))
-	if err == nil {
-		metricDeleteDays = converted
-	}
-
-	Config = Configuration{
-		PostgressConnection: os.Getenv("PG_CONN"),
-		MigrateOnStartup:    os.Getenv("MIGRATE_ON_STARTUP") == "true",
-		MetricDeleteDays:    metricDeleteDays,
-	}
-}
