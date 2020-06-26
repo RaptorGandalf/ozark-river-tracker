@@ -11,10 +11,10 @@ import (
 	_ "github.com/golang-migrate/migrate/database/postgres"
 	_ "github.com/golang-migrate/migrate/source/file"
 	"github.com/jinzhu/gorm"
-	"github.com/river-folk/ozark-river-tracker/api/service"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-co-op/gocron"
+	"github.com/river-folk/ozark-river-tracker/api/jobs"
 	"github.com/river-folk/ozark-river-tracker/api/repository"
 	"github.com/river-folk/ozark-river-tracker/api/router"
 )
@@ -37,13 +37,11 @@ func main() {
 	scheduler := gocron.NewScheduler(time.UTC)
 
 	scheduler.Every(15).Minutes().Do(func() {
-		db, err := repository.GetDatabase()
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		jobs.PerformReadGauges()
+	})
 
-		service.ReadGauges(db)
+	scheduler.Every(1).Days().Do(func() {
+		jobs.PerformCleanMetrics()
 	})
 
 	scheduler.StartAsync()

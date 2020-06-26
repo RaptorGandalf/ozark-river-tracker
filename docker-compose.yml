@@ -6,6 +6,8 @@ services:
     container_name: ort_db
     image: postgres
     restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -18,5 +20,9 @@ services:
     restart: always
     environment: 
       PG_CONN: postgres://postgres:postgres@db:5432/ort?sslmode=disable
+      METRIC_DELETE_DAYS: 120
+      ROLLBAR_TOKEN: supersecret
+      ORT_ENV: production
+
     ports:
-      - 80:80
+      - 8080:80

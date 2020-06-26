@@ -3,11 +3,12 @@ package configuration
 import (
 	"os"
 	"strconv"
+
+	"github.com/rollbar/rollbar-go"
 )
 
 type Configuration struct {
 	PostgressConnection string
-	MigrateOnStartup    bool
 	GaugeReadInterval   int
 	MetricDeleteDays    int
 }
@@ -31,8 +32,16 @@ func init() {
 
 	Config = Configuration{
 		PostgressConnection: os.Getenv("PG_CONN"),
-		MigrateOnStartup:    os.Getenv("MIGRATE_ON_STARTUP") == "true",
 		GaugeReadInterval:   gaugeReadInterval,
 		MetricDeleteDays:    metricDeleteDays,
 	}
+
+	ortEnv := os.Getenv("ORT_ENV")
+	if ortEnv == "" {
+		ortEnv = "development"
+	}
+
+	rollbar.SetToken(os.Getenv("ROLLBAR_TOKEN"))
+	rollbar.SetEnvironment(os.Getenv("ORT_ENV"))
+	rollbar.SetServerRoot("https://github.com/river-folk/ozark-river-tracker")
 }
