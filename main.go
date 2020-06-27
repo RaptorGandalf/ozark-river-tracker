@@ -66,17 +66,9 @@ func main() {
 	}
 
 	http := gin.Default()
+	http.Use(cors.Default())
 
 	router.Setup(http, connection)
-
-	http.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:4200", "https://localhost:4200", "https://www.ozarkrivertracker.com", "https://ozarkrivertracker.com"},
-		AllowMethods:     []string{"GET"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-		MaxAge:           12 * time.Hour,
-	}))
 
 	err = http.Run("0.0.0.0:80")
 	if err != nil {
