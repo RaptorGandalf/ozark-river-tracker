@@ -12,6 +12,7 @@ import (
 	_ "github.com/golang-migrate/migrate/source/file"
 	"github.com/jinzhu/gorm"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-co-op/gocron"
 	"github.com/river-folk/ozark-river-tracker/api/jobs"
@@ -67,6 +68,15 @@ func main() {
 	http := gin.Default()
 
 	router.Setup(http, connection)
+
+	http.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:4200", "https://localhost:4200", "https://www.ozarkrivertracker.com", "https://ozarkrivertracker.com"},
+		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	err = http.Run("0.0.0.0:80")
 	if err != nil {
