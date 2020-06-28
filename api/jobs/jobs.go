@@ -25,6 +25,8 @@ func PerformCleanMetrics() {
 		panic(err)
 	}
 
+	defer db.Connection.Close()
+
 	err = db.MetricRepo.DeleteOldMetrics()
 	if err != nil {
 		panic(err)
