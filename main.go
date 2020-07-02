@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/river-folk/ozark-river-tracker/configuration"
+	"github.com/teamship-studios/ozark-river-tracker/configuration"
 
 	"github.com/golang-migrate/migrate"
 	_ "github.com/golang-migrate/migrate/database/postgres"
@@ -15,9 +15,9 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-co-op/gocron"
-	"github.com/river-folk/ozark-river-tracker/api/jobs"
-	"github.com/river-folk/ozark-river-tracker/api/repository"
-	"github.com/river-folk/ozark-river-tracker/api/router"
+	"github.com/teamship-studios/ozark-river-tracker/api/jobs"
+	"github.com/teamship-studios/ozark-river-tracker/api/repository"
+	"github.com/teamship-studios/ozark-river-tracker/api/router"
 )
 
 func main() {

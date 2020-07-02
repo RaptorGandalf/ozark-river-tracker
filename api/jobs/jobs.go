@@ -1,9 +1,9 @@
 package jobs
 
 import (
-	"github.com/river-folk/ozark-river-tracker/api/repository"
-	"github.com/river-folk/ozark-river-tracker/api/service"
-	"github.com/river-folk/ozark-river-tracker/pkg/common"
+	"github.com/teamship-studios/ozark-river-tracker/api/repository"
+	"github.com/teamship-studios/ozark-river-tracker/api/service"
+	"github.com/teamship-studios/ozark-river-tracker/pkg/common"
 )
 
 func PerformReadGauges() {

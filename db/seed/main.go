@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/river-folk/ozark-river-tracker/api/model"
-	"github.com/river-folk/ozark-river-tracker/api/repository"
-	"github.com/river-folk/ozark-river-tracker/api/service"
+	"github.com/teamship-studios/ozark-river-tracker/api/model"
+	"github.com/teamship-studios/ozark-river-tracker/api/repository"
+	"github.com/teamship-studios/ozark-river-tracker/api/service"
 )
 
 func main() {

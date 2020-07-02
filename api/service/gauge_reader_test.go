@@ -3,12 +3,12 @@ package service_test
 import (
 	"testing"
 
-	"github.com/river-folk/ozark-river-tracker/api/service"
-	"github.com/river-folk/ozark-river-tracker/pkg/usgs"
+	"github.com/teamship-studios/ozark-river-tracker/api/service"
+	"github.com/teamship-studios/ozark-river-tracker/pkg/usgs"
 	"gopkg.in/h2non/gock.v1"
 
-	"github.com/river-folk/ozark-river-tracker/api/model"
-	"github.com/river-folk/ozark-river-tracker/api/repository"
+	"github.com/teamship-studios/ozark-river-tracker/api/model"
+	"github.com/teamship-studios/ozark-river-tracker/api/repository"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"

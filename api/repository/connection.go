@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/river-folk/ozark-river-tracker/configuration"
+	"github.com/teamship-studios/ozark-river-tracker/configuration"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"

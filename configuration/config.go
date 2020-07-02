@@ -43,5 +43,5 @@ func init() {
 
 	rollbar.SetToken(os.Getenv("ROLLBAR_TOKEN"))
 	rollbar.SetEnvironment(os.Getenv("ORT_ENV"))
-	rollbar.SetServerRoot("https://github.com/river-folk/ozark-river-tracker")
+	rollbar.SetServerRoot("https://github.com/teamship-studios/ozark-river-tracker")
 }

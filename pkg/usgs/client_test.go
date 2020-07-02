@@ -3,7 +3,7 @@ package usgs_test
 import (
 	"testing"
 
-	"github.com/river-folk/ozark-river-tracker/pkg/usgs"
+	"github.com/teamship-studios/ozark-river-tracker/pkg/usgs"
 	gock "gopkg.in/h2non/gock.v1"
 
 	"github.com/stretchr/testify/assert"

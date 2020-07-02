@@ -5,8 +5,8 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	"github.com/river-folk/ozark-river-tracker/api/model"
-	"github.com/river-folk/ozark-river-tracker/configuration"
+	"github.com/teamship-studios/ozark-river-tracker/api/model"
+	"github.com/teamship-studios/ozark-river-tracker/configuration"
 )
 
 type MetricRepository interface {

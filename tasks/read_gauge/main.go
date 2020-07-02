@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/river-folk/ozark-river-tracker/pkg/usgs"
+	"github.com/teamship-studios/ozark-river-tracker/pkg/usgs"
 )
 
 func main() {
