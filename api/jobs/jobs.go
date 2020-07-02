@@ -14,6 +14,8 @@ func PerformReadGauges() {
 		panic(err)
 	}
 
+	defer db.Connection.Close()
+
 	service.ReadGauges(db)
 }
 
