@@ -6,6 +6,8 @@ import (
 )
 
 func SeedRiver(riverSeed model.RiverSeed, db repository.Database) error {
+
+	// TODO: Skip river if it already exists
 	river := riverSeed.River
 
 	err := db.RiverRepo.Create(&river)
@@ -13,6 +15,7 @@ func SeedRiver(riverSeed model.RiverSeed, db repository.Database) error {
 		return err
 	}
 
+	// TODO: Skip gauge if it already exists
 	for _, gauge := range riverSeed.Gauges {
 		gauge.RiverId = river.Id
 		err := db.GaugeRepo.Create(&gauge)
