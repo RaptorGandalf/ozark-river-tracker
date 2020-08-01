@@ -62,6 +62,17 @@ func (suite *RiverTestSuite) TestGet() {
 
 	suite.Db.RiverRepo.Create(&river)
 
+	result, err := suite.Db.RiverRepo.GetByName(river.Name)
+
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), river.Id, result.Id)
+}
+
+func (suite *RiverTestSuite) TestGetByName() {
+	river := suite.River
+
+	suite.Db.RiverRepo.Create(&river)
+
 	result, err := suite.Db.RiverRepo.Get(river.Id)
 
 	assert.Nil(suite.T(), err)

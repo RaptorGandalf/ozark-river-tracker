@@ -7,16 +7,35 @@ import (
 
 func SeedRiver(riverSeed model.RiverSeed, db repository.Database) error {
 
-	// TODO: Skip river if it already exists
 	river := riverSeed.River
 
-	err := db.RiverRepo.Create(&river)
+	exists, err := db.RiverRepo.GetByName(river.Name)
 	if err != nil {
 		return err
 	}
 
-	// TODO: Skip gauge if it already exists
+	if exists != nil {
+		return nil
+	}
+
+	err = db.RiverRepo.Create(&river)
+	if err != nil {
+		return err
+	}
+
+	gauges, err := db.GaugeRepo.GetRiverGauges(river.Id)
+	if err != nil {
+		return err
+	}
+
 	for _, gauge := range riverSeed.Gauges {
+
+		if gauges != nil {
+			if gaugeExists(gauge.Name, *gauges) {
+				continue
+			}
+		}
+
 		gauge.RiverId = river.Id
 		err := db.GaugeRepo.Create(&gauge)
 		if err != nil {
@@ -25,4 +44,13 @@ func SeedRiver(riverSeed model.RiverSeed, db repository.Database) error {
 	}
 
 	return nil
+}
+
+func gaugeExists(name string, gauges []model.Gauge) bool {
+	for _, gauge := range gauges {
+		if gauge.Name == name {
+			return true
+		}
+	}
+	return false
 }

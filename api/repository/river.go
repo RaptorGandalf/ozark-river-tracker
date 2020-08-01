@@ -9,6 +9,7 @@ import (
 type RiverRepository interface {
 	GetAll() (*[]model.River, error)
 	Get(uuid.UUID) (*model.River, error)
+	GetByName(name string) (*model.River, error)
 	Create(river *model.River) error
 	Update(river *model.River) error
 	Delete(uuid.UUID) error
@@ -37,6 +38,18 @@ func (r *riverRepository) Get(id uuid.UUID) (*model.River, error) {
 
 	err := r.DB.Where("id = ?", id).Take(&river).Error
 
+	if err == gorm.ErrRecordNotFound {
+		return nil, nil
+	}
+
+	return &river, err
+}
+
+// TODO: Unique constraint on river name
+func (r *riverRepository) GetByName(name string) (*model.River, error) {
+	var river model.River
+
+	err := r.DB.Where("name = ?", name).Take(&river).Error
 	if err == gorm.ErrRecordNotFound {
 		return nil, nil
 	}
